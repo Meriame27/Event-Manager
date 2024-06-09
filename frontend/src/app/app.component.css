@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap');
+
+
+.tag , .card * {
+  font-family: Poppins;
+}
+
+body{
+  background-color:#f9fbfd;
+}
+
+.text{
+  color: rgb(28, 20, 78);
+  line-height: 1.75;
+  word-break: break-word;
+  margin: 0px 0px 4px;
+  font-size: 12px
+}
+
+.bold{
+  font-weight: bold;
+  font-size: 14px
+}
+
+.big{
+  font-size: 14px
+}
+
+input {
+  width: 100%;
+  flex-grow: 1;
+  height: 40px;
+  margin: 0px;
+  border: 2px solid rgb(203, 206, 210);
+  background-color: rgba( 222 , 222 , 222,0.10);
+  border-radius: 10px;
+  font-family: Rubik;
+  font-size: 18px;
+  font-weight: 400;
+  color: rgb(28, 20, 78);
+  padding: 0px 14px;
+  transition: border-bottom-color 200ms ease 0s;
+}
+
+form {
+  gap: 16px;
+  width: 100%;
+}
+
+
+input:focus {
+  outline: 2px solid #4285F4;
+
+}
+
+
+
+label{
+  display: block;
+  font-family: Poppins;
+  margin-bottom: 8px;
+}
+
+h2{
+  overflow: visible;
+  font-family: Rubik;
+  font-size: 30px;
+  font-weight: 700;
+  color: rgb(28, 20, 78);
+  line-height: 1.2;
+  margin: 16px 0;
+}
+
+h3{
+  overflow: visible;
+  font-family: Rubik;
+  font-size: 20px;
+  font-weight: 700;
+  color: rgb(28, 20, 78);
+  line-height: 1.2;
+}
+
+svg{
+  cursor: pointer;
+}
