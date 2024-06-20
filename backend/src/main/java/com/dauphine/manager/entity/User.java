@@ -20,12 +20,6 @@ public class User {
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private Collection<Registration> registrations;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private Collection<Feedback> feedbacks;
-
     @Override
     public String toString() {
         return "User{" +
