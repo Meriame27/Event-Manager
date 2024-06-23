@@ -1,0 +1,14 @@
+.event-list{
+    padding: 25px 50px
+}
+input{
+    margin: 20px auto !important;
+    max-width: 500px;
+
+}
+
+.input-div{
+    display:flex;
+    justify-self: center;
+    align-items: center;
+}

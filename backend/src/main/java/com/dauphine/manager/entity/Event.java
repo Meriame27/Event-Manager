@@ -6,7 +6,6 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Collection;
 
 @Data
 @Entity
@@ -22,9 +21,6 @@ public class Event {
     @NotEmpty(message = "Please enter the event name")
     @Column(name = "name", nullable = false)
     private String name;
-
-    @Column(name = "description", columnDefinition = "TEXT")
-    private String description;
 
     @NotNull(message = "Please enter the event date")
     @Column(name = "date", nullable = false)
@@ -42,18 +38,15 @@ public class Event {
     @Column(name = "category", nullable = false)
     private String category;
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private Collection<Registration> registrations;
-
-    @OneToMany(mappedBy = "event", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private Collection<Feedback> feedbacks;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "organizer_id", nullable = false)
+    private User organizer;
 
     @Override
     public String toString() {
         return "Event{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
                 ", date=" + date +
                 ", time=" + time +
                 ", location='" + location + '\'' +

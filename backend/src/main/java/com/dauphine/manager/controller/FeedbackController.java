@@ -16,33 +16,14 @@ public class FeedbackController {
     @Autowired
     private FeedbackService feedbackService;
 
-    @PostMapping("/")
-    public ResponseEntity<Feedback> createFeedback(@RequestBody @Valid Feedback feedback) {
-        Feedback createdFeedback = feedbackService.createFeedback(feedback);
-        return ResponseEntity.ok(createdFeedback);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Feedback> updateFeedback(@PathVariable Long id, @RequestBody @Valid Feedback feedbackDetails) {
-        Feedback updatedFeedback = feedbackService.updateFeedback(id, feedbackDetails);
-        return ResponseEntity.ok(updatedFeedback);
+    @GetMapping("/average-rating")
+    public Double getEventAverageRating(@RequestParam Long eventId) {
+        return feedbackService.getEventAverageRating(eventId);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Feedback> getFeedbackById(@PathVariable Long id) {
         Feedback feedback = feedbackService.getFeedbackById(id).orElseThrow(() -> new RuntimeException("Feedback not found with id " + id));
         return ResponseEntity.ok(feedback);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteFeedback(@PathVariable Long id) {
-        feedbackService.deleteFeedback(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping("/")
-    public ResponseEntity<List<Feedback>> getAllFeedbacks() {
-        List<Feedback> feedbacks = feedbackService.getAllFeedbacks();
-        return ResponseEntity.ok(feedbacks);
     }
 }

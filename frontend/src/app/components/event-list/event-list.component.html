@@ -1,1 +1,10 @@
-<p>event-list works!</p>
+<app-nav-bar></app-nav-bar>
+<app-add-event  *ngIf="router.url=='/events/new'"></app-add-event>
+<div   *ngIf="router.url=='/events/list'" class="input-div">
+    <input (input)="updateShowedEvents()" [(ngModel)]="searchValue" type="text" placeholder="Rechercher un événement" >
+</div>
+<div *ngIf="router.url=='/events/list'" class="d-flex flex-row event-list">
+    <div *ngFor="let event of showedEvents">
+        <app-event-card [event]="event" [removeEvent]="generateRemoveEvent(event)"></app-event-card>
+    </div>
+</div>

@@ -1,10 +1,12 @@
+import { User } from "./user.model";
+
 export interface Event {
-    id: number;
+    id?: number;
     name: string;
     date: string; 
-    time: string;
+    time: any;
     location: string;
-    description: string;
-    capacity: number;
     category: string;
+    organizer: User;
+    isRegistered: boolean;
 }

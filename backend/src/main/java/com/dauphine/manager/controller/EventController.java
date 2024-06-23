@@ -1,4 +1,5 @@
 package com.dauphine.manager.controller;
+import com.dauphine.manager.dto.EventDTO;
 import com.dauphine.manager.entity.Event;
 import com.dauphine.manager.service.EventService;
 import jakarta.validation.Valid;
@@ -16,7 +17,7 @@ public class EventController {
     private EventService eventService;
 
     @PostMapping("/")
-    public ResponseEntity<Event> createEvent(@RequestBody @Valid Event event) {
+    public ResponseEntity<Event> createOrUpdateFeedback(@RequestBody @Valid Event event) {
         Event createdEvent = eventService.createEvent(event);
         return ResponseEntity.ok(createdEvent);
     }
@@ -35,13 +36,13 @@ public class EventController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEvent(@PathVariable Long id) {
+        System.out.println(id);
         eventService.deleteEvent(id);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/")
-    public ResponseEntity<List<Event>> getAllEvents() {
-        List<Event> events = eventService.getAllEvents();
-        return ResponseEntity.ok(events);
+    @GetMapping
+    public List<EventDTO> getAllEvents(@RequestParam String username) {
+        return eventService.getAllEvents(username);
     }
 }

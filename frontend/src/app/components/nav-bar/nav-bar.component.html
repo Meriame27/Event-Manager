@@ -1,0 +1,15 @@
+<nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" [routerLink]="['/']">
+        Event Manager
+    </a>
+    <div>
+      <button class="secondary" (click)="logOut()">
+        <i class="bi bi-box-arrow-left"></i> &nbsp; Se déconnecter
+      </button>
+      <button class="primary" (click)="goTOcreateEvent()">
+        <i class="bi bi-pencil-square"></i> &nbsp; Créer un événement
+      </button>
+    </div>
+  </div>
+</nav>

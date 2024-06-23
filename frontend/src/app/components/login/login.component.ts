@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css','../../app.component.css']
 })
 export class LoginComponent {
   username: string = '';
@@ -26,7 +26,7 @@ export class LoginComponent {
     if (this.username) {
       const user: User = { id: Date.now(), username: this.username };
       this.userService.setCurrentUser(user);
-      this.router.navigate(['/events']);
+      this.router.navigate(['/events/list']);
     }
   }
 
@@ -41,7 +41,7 @@ export class LoginComponent {
 	onSubmit(): void {
     this.userService.getOrCreateUser(this.loginForm.value.username).subscribe(user=>{
       this.userService.setCurrentUser(user);
-      this.router.navigate(['/events'])
+      this.router.navigate(['/events/list'])
     })
 	}
 }

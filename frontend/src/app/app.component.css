@@ -3,13 +3,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap');
 
-
-.tag , .card * {
+*{
   font-family: Poppins;
+  box-sizing: border-box;
 }
 
 body{
   background-color:#f9fbfd;
+  min-height: 100vh !important;
 }
 
 .text{
@@ -85,4 +86,81 @@ h3{
 
 svg{
   cursor: pointer;
+}
+
+button{
+  cursor: pointer; 
+  font-family: Rubik; 
+  font-size: 14px;
+  height: 40px;
+  font-weight: 500;
+  transition: box-shadow 0.2s;
+  border: 2px solid rgb(203, 206, 210);
+  text-align: center;
+  color: rgb(28, 20, 78);
+  line-height: 1.5;  
+  border-radius: 10px;  
+  background-color: white;
+  padding: 0px 20px;
+}
+
+button.primary{
+  background-color:rgb(4, 104, 135);
+  border: none;
+  color: white;
+}
+
+button.error{
+  background-color:#cc0020;
+  border: none;
+  color: white;
+}
+
+
+button:hover {
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+button{
+  position: relative;
+  overflow: hidden;
+}
+
+button:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgb(122, 122, 122, .5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+button:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
+}            
+
+
+button.submit {
+  width: 200px;
+  margin: 16px auto;
 }

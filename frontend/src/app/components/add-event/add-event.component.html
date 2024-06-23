@@ -1,0 +1,111 @@
+<div class="container py-3">
+    <main class="form-signin w-100 m-auto">
+        <form [formGroup]="add_event_form" (ngSubmit)="onSubmit()">
+            <div class="py-2">
+                <span class="mb-3">Titre: </span>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="eventName"
+                    autocomplete="off" 
+                    [class.is-invalid]="name && name.invalid && name.touched"
+                    [class.is-valid]="name && name.valid && name.touched"
+                    formControlName="name"
+                />
+                <div
+                    *ngIf="name?.invalid && name?.touched"
+                    class="invalid-feedback text-danger py-2">
+                    <div *ngIf="name?.errors?.['required']">Le titre est requis</div>
+                    <div *ngIf="name?.errors?.['minlength']">Le titre doit avoir plus de 5 caractères</div>
+                    <div *ngIf="name?.errors?.['maxlength']">Le titre ne doit pas dépasser 150 caractères</div>
+                </div>
+            </div>
+
+            <div class="py-2">
+                <label for="eventCategory">Categorie: </label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="eventCategory"
+                    autocomplete="off"
+                    [class.is-invalid]="category &&category.invalid && category.touched"
+                    [class.is-valid]="category && category.valid && category.touched"
+                    formControlName="category"
+                />
+                <div
+                    *ngIf="category?.invalid && category?.touched"
+                    class="invalid-feedback text-danger">
+                    <div *ngIf="category?.errors?.['required']">La catégorie est requise</div>
+                </div>
+            </div>
+
+            <div class="py-2">
+                <label for="eventDate">Date: </label>
+                <input
+                    type="date"
+                    class="form-control"
+                    id="eventDate"
+                    [class.is-invalid]="date && date.invalid && date.touched"
+                    [class.is-valid]="date && date.valid && date.touched"
+                    formControlName="date"
+                />
+                <div
+                    *ngIf="date?.invalid && date?.touched"
+                    class="invalid-feedback text-danger">
+                    <div *ngIf="date?.errors?.['required']">La date est requise</div>
+                </div>
+            </div>
+            <div class="py-2">
+                <label for="eventTime">Heure: </label>
+                <input
+                    type="time"
+                    class="form-control"
+                    id="eventTime"
+                    [class.is-invalid]="time && time.invalid && time.touched"
+                    [class.is-valid]="time && time.valid && time.touched"
+                    formControlName="time"
+                />
+                <div
+                    *ngIf="time?.invalid && time?.touched"
+                    class="invalid-feedback text-danger">
+                    <div *ngIf="time?.errors?.['required']">L'heure est requise</div>
+                </div>
+            </div>
+            
+
+            <div class="py-2">
+                <label for="eventLocation">Lieu: </label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="eventLocation"
+                    autocomplete="off"
+                    [class.is-invalid]="location && location.invalid && location.touched"
+                    [class.is-valid]="location && location.valid && location.touched"
+                    formControlName="location"
+                />
+                <div
+                    *ngIf="location?.invalid && location?.touched"
+                    class="invalid-feedback text-danger">
+                    <div *ngIf="location?.errors?.['required']">Le lieu est requis</div>
+                </div>
+            </div>
+
+            
+
+            <div class="float-end">
+                <button
+                    (click)="goToHomePage()"
+                    class="secondary"
+                    type="button">
+                    Annuler
+                </button>
+                <button
+                    class="primary"
+                    type="submit">
+                    Créer
+                </button>
+            </div>
+        </form>
+    </main>
+</div>

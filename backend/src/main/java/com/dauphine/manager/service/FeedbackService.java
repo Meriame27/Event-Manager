@@ -7,9 +7,8 @@ import java.util.Optional;
 
 
 public interface FeedbackService {
-    List<Feedback> getAllFeedbacks();
+    Double getEventAverageRating(Long eventId);
+
     Optional<Feedback> getFeedbackById(Long id);
-    Feedback createFeedback(Feedback feedback);
-    Feedback updateFeedback(Long id, Feedback feedbackDetails);
-    void deleteFeedback(Long id);
+     Feedback createOrUpdateFeedback( Feedback feedbackDetails);
 }

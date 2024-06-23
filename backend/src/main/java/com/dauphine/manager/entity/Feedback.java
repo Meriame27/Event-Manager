@@ -31,10 +31,6 @@ public class Feedback {
     @Column(name = "rating")
     private int rating;
 
-    @NotEmpty(message = "Please enter the comments")
-    @Column(name = "comments", columnDefinition = "TEXT")
-    private String comments;
-
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "submitted_at", nullable = false, updatable = false)
@@ -47,7 +43,6 @@ public class Feedback {
                 ", user=" + user.getUsername() +
                 ", event=" + event.getName() +
                 ", rating=" + rating +
-                ", comments='" + comments + '\'' +
                 ", submittedAt=" + submittedAt +
                 '}';
     }
