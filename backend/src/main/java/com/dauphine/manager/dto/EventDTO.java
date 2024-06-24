@@ -14,8 +14,7 @@ public class EventDTO {
     private LocalTime time;
     private LocalDate date;
     private String category;
-    private boolean isOwner;
     private boolean isRegistered;
-    private User organizer;
+    private Long  organizerId;
 
 }

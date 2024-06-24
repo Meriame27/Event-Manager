@@ -7,6 +7,6 @@ export interface Event {
     time: any;
     location: string;
     category: string;
-    organizer: User;
+    organizerId: number;
     isRegistered: boolean;
 }

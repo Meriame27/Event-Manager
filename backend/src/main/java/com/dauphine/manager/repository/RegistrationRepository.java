@@ -13,7 +13,6 @@ import java.util.List;
 @Repository
 public interface RegistrationRepository extends JpaRepository<Registration, Long> {
     List<Registration> findByUser(@Param("user") User user);
-
-    List<Registration> deleteByEvent(Event event);
+    List<Registration> findByEvent(Event event);
 
 }

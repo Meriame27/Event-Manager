@@ -1,5 +1,6 @@
 package com.dauphine.manager.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import jakarta.persistence.*;
@@ -10,6 +11,7 @@ import java.util.Date;
 @Entity
 @Table(name = "registrations")
 @SequenceGenerator(name = "registration_seq_gen", sequenceName = "registration_seq", initialValue = 10, allocationSize = 1)
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class Registration {
 
     @Id

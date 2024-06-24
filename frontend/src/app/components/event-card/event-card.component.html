@@ -20,6 +20,6 @@
         <button mat-button class="error" *ngIf="event.isRegistered"(click)="handleRefuse()">Quiter</button>
         <button mat-button *ngIf="isOwner"(click)="modify()">Modifier</button>
       </div>
-      <app-star-rating (rated)="sendFeedback($event)" class="center"></app-star-rating>
+      <app-star-rating [eventId]="event.id"  class="center"></app-star-rating>
     </div>
   </div>

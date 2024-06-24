@@ -11,16 +11,16 @@ export class FeedbackService {
 
   constructor(private http: HttpClient) { }
 
-  getEventAverageRating(eventId: number): Observable<number> {
+  getEventAverageRating(eventId: number|undefined): Observable<number> {
     return this.http.get<number>(`${this.baseUrl}/average-rating?eventId=${eventId}`);
   }
 
-  getFeedbackById(id: number): Observable<Feedback> {
-    return this.http.get<Feedback>(`${this.baseUrl}/${id}`);
+  getUserFeedbackOnEvent(eventId: number|undefined, userId: number): Observable<Feedback> {
+    return this.http.get<Feedback>(`${this.baseUrl}/event/user-feedback?eventId=${eventId}&userId=${userId}`);
   }
 
-  createOrUpdateFeedback(feedbackRequest: Feedback): Observable<Feedback> {
-    return this.http.post<Feedback>(`${this.baseUrl}/`, feedbackRequest);
+  createOrUpdateUserFeedback(eventId: number|undefined, userId: number, feedback: Feedback|null): Observable<Feedback> {
+    return this.http.post<Feedback>(`${this.baseUrl}/event/user-feedback?eventId=${eventId}&userId=${userId}`, feedback);
   }
 
   

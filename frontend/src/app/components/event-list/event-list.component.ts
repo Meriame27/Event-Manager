@@ -47,7 +47,9 @@ export class EventListComponent implements OnInit {
   generateRemoveEvent(e:Event){
     let removeEvent = ()=> {
       console.log(e.id)
-      if(e.id)this.eventService.deleteEvent(e.id);
+      if(e.id)this.eventService.deleteEvent(e.id).subscribe(()=>{
+        console.log("Event Removed")
+      });
       this.events = this.events.filter(event => (event.id !== e.id));
       this.updateShowedEvents();
     }

@@ -28,12 +28,6 @@ public class EventController {
         return ResponseEntity.ok(updatedEvent);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Event> getEventById(@PathVariable Long id) {
-        Event event = eventService.getEventById(id).orElseThrow(() -> new RuntimeException("Event not found with id " + id));
-        return ResponseEntity.ok(event);
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEvent(@PathVariable Long id) {
         System.out.println(id);
@@ -42,7 +36,7 @@ public class EventController {
     }
 
     @GetMapping
-    public List<EventDTO> getAllEvents(@RequestParam String username) {
-        return eventService.getAllEvents(username);
+    public ResponseEntity<List<EventDTO>>  getAllEvents(@RequestParam String username) {
+        return  ResponseEntity.ok(eventService.getAllEvents(username));
     }
 }

@@ -6,11 +6,14 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Data
 @Entity
 @Table(name = "events")
 @SequenceGenerator(name = "event_seq_gen", sequenceName = "event_seq", initialValue = 10, allocationSize = 1)
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class Event {
 
     @Id

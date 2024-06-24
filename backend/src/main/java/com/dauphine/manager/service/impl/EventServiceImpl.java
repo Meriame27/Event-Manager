@@ -4,6 +4,7 @@ import com.dauphine.manager.dto.EventDTO;
 import com.dauphine.manager.entity.Event;
 import com.dauphine.manager.entity.Registration;
 import com.dauphine.manager.entity.User;
+import com.dauphine.manager.entity.Feedback;
 import com.dauphine.manager.repository.EventRepository;
 import com.dauphine.manager.repository.FeedbackRepository;
 import com.dauphine.manager.repository.RegistrationRepository;
@@ -11,6 +12,7 @@ import com.dauphine.manager.repository.UserRepository;
 import com.dauphine.manager.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -44,7 +46,7 @@ public class EventServiceImpl implements EventService {
             eventDTO.setDate(event.getDate());
             eventDTO.setCategory(event.getCategory());
             eventDTO.setTime(event.getTime());
-            eventDTO.setOrganizer(event.getOrganizer());
+            eventDTO.setOrganizerId(event.getOrganizer().getId());
             eventDTO.setRegistered(registrations.stream().anyMatch(reg -> reg.getEvent().getId().equals(event.getId())));
             return eventDTO;
         }).collect(Collectors.toList());
@@ -73,11 +75,18 @@ public class EventServiceImpl implements EventService {
         }
     }
 
+    @Transactional
     public void deleteEvent(Long id) {
-        Event e =eventRepository.findById(id).get();
-        System.out.println(e);
-        feedbackRepository.deleteByEvent(e);
-        registrationRepository.deleteByEvent(e);
-        eventRepository.deleteById(id);
+        Optional<Event> optionalEvent = eventRepository.findById(id);
+        if (optionalEvent.isPresent()) {
+            Event event = optionalEvent.get();
+            List<Feedback> feedbacks = feedbackRepository.findByEvent(event);
+            feedbackRepository.deleteAll(feedbacks);
+            List<Registration> registrations = registrationRepository.findByEvent(event);
+            registrationRepository.deleteAll(registrations);
+            eventRepository.delete(event);
+        } else {
+            throw new RuntimeException("Event not found with id " + id);
+        }
     }
 }
