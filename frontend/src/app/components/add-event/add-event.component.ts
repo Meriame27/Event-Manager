@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { EventService } from 'src/app/services/event.service';
 import { Observer } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-add-event',
@@ -29,7 +31,6 @@ export class AddEventComponent {
     ],
     date: ['', Validators.required],
     time: ['', Validators.required],
-    location: ['', Validators.required],
 });
 
   constructor(private fb: FormBuilder, private router: Router,private eventService:EventService,private userService:UserService) {}
@@ -53,9 +54,6 @@ export class AddEventComponent {
     return this.add_event_form.get('date');
   }
 
-  get location() {
-    return this.add_event_form.get('location');
-  }
 
 
   goToHomePage(): void {
@@ -63,20 +61,35 @@ export class AddEventComponent {
   }
 
 	onSubmit(): void {
-	if (this.add_event_form.valid) {
-		const observer: Observer<any> = {
-			next: () => {
-				alert("Formulaire soumis avec succès!");
-        this.goToHomePage();
-			},
-			error: () => {
-				alert("Erreur lors de la soumission du formulaire");
-			},
-      complete: () => {
-			}
-		};
-    this.userService.getCurrentUser().subscribe(user=>{
-      this.eventService.createEvent({...this.add_event_form.value,organizer:user}).subscribe(observer);
-    })
-	};   
-}}
+    if (this.add_event_form.valid) {
+      console.log(this.add_event_form.value);
+      const observer: Observer<any> = {
+        next: () => {
+          Swal.fire({
+            title: 'Success!',
+            text: 'Formulaire soumis avec succès!',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          }).then(() => {
+            this.goToHomePage();
+          });
+        },
+        error: () => {
+          Swal.fire({
+            title: 'Error!',
+            text: 'Erreur lors de la soumission du formulaire',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
+        },
+        complete: () => {}
+      };
+
+      this.userService.getCurrentUser().subscribe(user => {
+        this.eventService.createEvent({ ...this.add_event_form.value, organizer: user }).subscribe(observer);
+      });
+    }
+  }
+
+
+}

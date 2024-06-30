@@ -8,3 +8,5 @@
         <app-event-card [event]="event" [removeEvent]="generateRemoveEvent(event)"></app-event-card>
     </div>
 </div>
+<app-feedbacks-lsit  *ngIf="router.url.startsWith('/events/feedbacks')"></app-feedbacks-lsit>
+

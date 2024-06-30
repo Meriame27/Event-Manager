@@ -12,23 +12,21 @@ export class RegistrationService {
 
   constructor(private http: HttpClient) { }
 
-  getAllRegistrations(): Observable<Registration[]> {
-    return this.http.get<Registration[]>(`${this.baseUrl}/`);
+  registerUserToEvent(eventId: number|undefined, userId: number): Observable<any> {
+    return this.http.post(`${this.baseUrl}/register`, null, {
+      params: {
+        eventId: eventId ? eventId.toString() : '0',
+        userId: userId.toString()
+      }
+    });
   }
 
-  getRegistrationById(id: number): Observable<Registration> {
-    return this.http.get<Registration>(`${this.baseUrl}/${id}`);
-  }
-
-  createRegistration(registrationRequest: RegistrationRequest): Observable<Registration> {
-    return this.http.post<Registration>(`${this.baseUrl}/`, registrationRequest);
-  }
-
-  updateRegistration(id: number, registrationRequest: RegistrationRequest): Observable<Registration> {
-    return this.http.put<Registration>(`${this.baseUrl}/${id}`, registrationRequest);
-  }
-
-  deleteRegistration(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  unregisterUserFromEvent(eventId: number|undefined, userId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/unregister`, {
+      params: {
+        eventId: eventId ? eventId.toString() : '0',
+        userId: userId.toString()
+      }
+    });
   }
 }

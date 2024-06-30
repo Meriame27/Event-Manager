@@ -1,5 +1,6 @@
 package com.dauphine.manager.service.impl;
 
+import com.dauphine.manager.dto.CommentDTO;
 import com.dauphine.manager.dto.FeedbackDTO;
 import com.dauphine.manager.entity.Feedback;
 import com.dauphine.manager.entity.Event;
@@ -10,8 +11,11 @@ import com.dauphine.manager.repository.UserRepository;
 import com.dauphine.manager.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class FeedbackServiceImpl implements FeedbackService {
@@ -24,6 +28,16 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Autowired
     private UserRepository userRepository;
+
+    public List<CommentDTO> getEventFeedbacks(Long eventId) {
+        List<Feedback> feedbacks = feedbackRepository.findByEventId(eventId);
+        return feedbacks.stream().map(feedback -> {
+            CommentDTO dto = new CommentDTO();
+            dto.setComment(feedback.getComment());
+            dto.setUsername(feedback.getUser().getUsername());
+            return dto;
+        }).collect(Collectors.toList());
+    }
 
     public Double getEventAverageRating(Long eventId) {
         Event event = eventRepository.findById(eventId).orElseThrow(() -> new RuntimeException("Event not found"));
@@ -56,6 +70,25 @@ public class FeedbackServiceImpl implements FeedbackService {
             feedback.setEvent(event);
             feedback.setUser(user);
             feedback.setRating(feedbackDetails.getRating());
+        }
+        return feedbackRepository.save(feedback);
+    }
+
+    @Transactional
+    public Feedback updateOrCreateFeedbackWithComment(Long eventId, Long userId, String comment) {
+        Event event = eventRepository.findById(eventId).orElseThrow(() -> new RuntimeException("Event not found"));
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+
+        Optional<Feedback> existingFeedback = feedbackRepository.findByEventAndUser(event, user);
+        Feedback feedback;
+        if (existingFeedback.isPresent()) {
+            feedback = existingFeedback.get();
+            feedback.setComment(comment);
+        } else {
+            feedback = new Feedback();
+            feedback.setEvent(event);
+            feedback.setUser(user);
+            feedback.setComment(comment);
         }
         return feedbackRepository.save(feedback);
     }

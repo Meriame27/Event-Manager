@@ -8,41 +8,35 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/registrations")
-public class RegistrationController {
+public class RegistrationController{
 
     @Autowired
     private RegistrationService registrationService;
 
-    @PostMapping("/")
-    public ResponseEntity<Registration> createRegistration(@RequestBody @Valid Registration registration) {
-        Registration createdRegistration = registrationService.createRegistration(registration);
-        return ResponseEntity.ok(createdRegistration);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Registration> updateRegistration(@PathVariable Long id, @RequestBody @Valid Registration registrationDetails) {
-        Registration updatedRegistration = registrationService.updateRegistration(id, registrationDetails);
-        return ResponseEntity.ok(updatedRegistration);
+    @GetMapping
+    public List<Registration> getAllRegistrations() {
+        return registrationService.getAllRegistrations();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Registration> getRegistrationById(@PathVariable Long id) {
-        Registration registration = registrationService.getRegistrationById(id).orElseThrow(() -> new RuntimeException("Registration not found with id " + id));
+    public ResponseEntity<Optional<Registration>> getRegistrationById(@PathVariable Long id) {
+        Optional<Registration> registration = registrationService.getRegistrationById(id);
         return ResponseEntity.ok(registration);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteRegistration(@PathVariable Long id) {
-        registrationService.deleteRegistration(id);
-        return ResponseEntity.noContent().build();
+    @PostMapping("/register")
+    public ResponseEntity<Registration> registerUserToEvent(@RequestParam Long eventId, @RequestParam Long userId) {
+        Registration registration = registrationService.registerUserToEvent(eventId, userId);
+        return ResponseEntity.ok(registration);
     }
 
-    @GetMapping("/")
-    public ResponseEntity<List<Registration>> getAllRegistrations() {
-        List<Registration> registrations = registrationService.getAllRegistrations();
-        return ResponseEntity.ok(registrations);
+    @DeleteMapping("/unregister")
+    public ResponseEntity<Void> unregisterUserFromEvent(@RequestParam Long eventId, @RequestParam Long userId) {
+        registrationService.unregisterUserFromEvent(eventId, userId);
+        return ResponseEntity.noContent().build();
     }
 }

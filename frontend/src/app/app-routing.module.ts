@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'events',  canActivate: [AuthGuard] , children: [
     { path: 'list', component: EventListComponent },
     { path: 'new', component: EventListComponent },
+    { path: 'feedbacks/:id', component: EventListComponent },
 ] },
   { path: '**', redirectTo: '/events/list' }
 ];

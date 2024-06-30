@@ -1,5 +1,6 @@
 .event-list{
-    padding: 25px 50px
+    padding: 25px 50pX;
+    flex-wrap: wrap;
 }
 input{
     margin: 20px auto !important;

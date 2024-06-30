@@ -19,4 +19,6 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
 
     @Query("SELECT AVG(f.rating) FROM Feedback f WHERE f.event = :event")
     Double findAverageRatingByEvent(@Param("event") Event event);
+
+    List<Feedback> findByEventId(Long eventId);
 }

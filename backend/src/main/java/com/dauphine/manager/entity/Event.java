@@ -31,11 +31,8 @@ public class Event {
 
     @NotNull(message = "Please enter the event time")
     @Column(name = "time", nullable = false)
-    private LocalTime time;
+    private String time;
 
-    @NotEmpty(message = "Please enter the event location")
-    @Column(name = "location", nullable = false)
-    private String location;
 
     @NotEmpty(message = "Please enter the event category")
     @Column(name = "category", nullable = false)
@@ -45,6 +42,7 @@ public class Event {
     @JoinColumn(name = "organizer_id", nullable = false)
     private User organizer;
 
+
     @Override
     public String toString() {
         return "Event{" +
@@ -52,7 +50,6 @@ public class Event {
                 ", name='" + name + '\'' +
                 ", date=" + date +
                 ", time=" + time +
-                ", location='" + location + '\'' +
                 ", category='" + category + '\'' +
                 '}';
     }

@@ -30,7 +30,7 @@ body{
   font-size: 14px
 }
 
-input {
+input, textarea, select{
   width: 100%;
   flex-grow: 1;
   height: 40px;
@@ -52,7 +52,7 @@ form {
 }
 
 
-input:focus {
+input:focus, textarea:focus {
   outline: 2px solid #4285F4;
 
 }

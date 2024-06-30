@@ -11,10 +11,11 @@ public class EventDTO {
     private Long id;
     private String name;
     private String location;
-    private LocalTime time;
+    private String  time;
     private LocalDate date;
     private String category;
     private boolean isRegistered;
     private Long  organizerId;
+
 
 }

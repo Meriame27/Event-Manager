@@ -9,7 +9,6 @@ import java.util.Optional;
 public interface RegistrationService {
     List<Registration> getAllRegistrations();
     Optional<Registration> getRegistrationById(Long id);
-    Registration createRegistration(Registration registration);
-    Registration updateRegistration(Long id, Registration registrationDetails);
-    void deleteRegistration(Long id);
+     Registration registerUserToEvent(Long eventId, Long userId);
+    void unregisterUserFromEvent(Long eventId, Long userId);
 }

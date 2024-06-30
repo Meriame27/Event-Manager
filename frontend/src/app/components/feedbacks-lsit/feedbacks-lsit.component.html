@@ -1,0 +1,31 @@
+<div class="feebacks-wrapper">
+    <br><br>
+    <h3>Donner votre avis:</h3>
+    <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+        <div>
+          <input 
+          id="comment"
+          formControlName="comment"
+          class="form-control"
+          rows="5"
+          maxlength="50"
+          (input)="updateCharacterCount()"
+          />
+          <div *ngIf="feedbackForm.get('comment')?.invalid && (feedbackForm.get('comment')?.dirty || feedbackForm.get('comment')?.touched)">
+            <small *ngIf="feedbackForm.get('comment')?.errors?.['required']">Comment is required.</small>
+          </div>
+        </div>
+        <div class="float-end">
+          <button (click)="goBack()" >Retour</button>
+          <button type="submit" class="primary">Soumettre</button>
+        </div>
+      </form>
+      <br><br><br>
+    <div *ngFor="let feedback of feedbacks">
+     <div class=comment>
+        <p class="username"><strong>{{ feedback.username }}:</strong></p>
+        <p class="comment-text">{{ feedback.comment }}</p>
+     </div>
+    </div>
+    <br>
+  </div>

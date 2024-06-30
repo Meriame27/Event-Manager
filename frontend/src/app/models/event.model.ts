@@ -4,8 +4,7 @@ export interface Event {
     id?: number;
     name: string;
     date: string; 
-    time: any;
-    location: string;
+    time: string;
     category: string;
     organizerId: number;
     isRegistered: boolean;

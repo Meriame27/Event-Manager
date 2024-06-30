@@ -35,6 +35,12 @@ public class EventController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Event> getEventById(@PathVariable Long id) {
+        Event event = eventService.getEventById(id).get();
+        return ResponseEntity.ok(event);
+    }
+
     @GetMapping
     public ResponseEntity<List<EventDTO>>  getAllEvents(@RequestParam String username) {
         return  ResponseEntity.ok(eventService.getAllEvents(username));

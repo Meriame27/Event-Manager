@@ -1,0 +1,43 @@
+button{
+    margin: 20px 5px;
+}
+
+.feebacks-wrapper{
+    margin: 0 auto;
+    max-width: 650px;
+}
+
+textarea{
+    height: 100px !important;
+}
+
+.comment {
+    margin: 8px;
+    justify-content: center;
+    overflow: visible;
+    background-color: rgb(255, 255, 255);
+    border-radius: 0px;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 4px 0px;
+    padding: 0px 8px;
+    opacity: 1;
+    padding: 16px;
+    border-radius:25px;
+  }
+
+  p{
+    margin: 0;
+  }
+
+  .comment-text{
+    padding-left: 16px;
+    margin-top: 2px;
+  }
+  .username{
+    margin-bottom: 4px;
+  }
+
+  .feebacks-list{
+    overflow: scroll;
+    max-height: 500px;
+  }

@@ -42,7 +42,6 @@ public class EventServiceImpl implements EventService {
             EventDTO eventDTO = new EventDTO();
             eventDTO.setId(event.getId());
             eventDTO.setName(event.getName());
-            eventDTO.setLocation(event.getLocation());
             eventDTO.setDate(event.getDate());
             eventDTO.setCategory(event.getCategory());
             eventDTO.setTime(event.getTime());
@@ -52,8 +51,14 @@ public class EventServiceImpl implements EventService {
         }).collect(Collectors.toList());
     }
 
+    @Override
     public Optional<Event> getEventById(Long id) {
-        return eventRepository.findById(id);
+        Optional<Event> event = eventRepository.findById(id);
+        if (event.isPresent()) {
+            return event;
+        } else {
+            throw new RuntimeException("Event not found with id " + id);
+        }
     }
 
     public Event createEvent(Event event) {
@@ -67,7 +72,6 @@ public class EventServiceImpl implements EventService {
             event.setName(eventDetails.getName());
             event.setDate(eventDetails.getDate());
             event.setTime(eventDetails.getTime());
-            event.setLocation(eventDetails.getLocation());
             event.setOrganizer(eventDetails.getOrganizer());
             return eventRepository.save(event);
         } else {
@@ -89,4 +93,5 @@ public class EventServiceImpl implements EventService {
             throw new RuntimeException("Event not found with id " + id);
         }
     }
+
 }

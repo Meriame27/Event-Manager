@@ -16,6 +16,7 @@ import { StarRatingComponent } from './components/star-rating/star-rating.compon
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { AddEventComponent } from './components/add-event/add-event.component';
 import { CommonModule } from '@angular/common';
+import { FeedbacksLsitComponent } from './components/feedbacks-lsit/feedbacks-lsit.component';
 
 
 
@@ -27,7 +28,8 @@ import { CommonModule } from '@angular/common';
     EventCardComponent,
     StarRatingComponent,
     NavBarComponent,
-    AddEventComponent
+    AddEventComponent,
+    FeedbacksLsitComponent,
   ],
   imports: [
     CommonModule,

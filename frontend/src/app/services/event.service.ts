@@ -14,7 +14,7 @@ export class EventService {
     return this.http.get<Event[]>(`${this.baseUrl}?username=${username}`);
   }
 
-  getEventById(id: number): Observable<Event> {
+  getEventById(id: number|undefined|null): Observable<Event> {
     return this.http.get<Event>(`${this.baseUrl}/${id}`);
   }
 
@@ -29,4 +29,5 @@ export class EventService {
   deleteEvent(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
+
 }

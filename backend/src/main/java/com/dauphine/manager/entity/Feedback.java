@@ -30,6 +30,9 @@ public class Feedback {
     @Column(name = "rating")
     private int rating;
 
+    @Column(name = "comment")
+    private String comment;
+
     @Override
     public String toString() {
         return "Feedback{" +
@@ -37,6 +40,7 @@ public class Feedback {
                 ", user=" + user.getUsername() +
                 ", event=" + event.getName() +
                 ", rating=" + rating +
+                ", comment=" + comment +
                 '}';
     }
 }

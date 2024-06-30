@@ -72,27 +72,7 @@
                 </div>
             </div>
             
-
-            <div class="py-2">
-                <label for="eventLocation">Lieu: </label>
-                <input
-                    type="text"
-                    class="form-control"
-                    id="eventLocation"
-                    autocomplete="off"
-                    [class.is-invalid]="location && location.invalid && location.touched"
-                    [class.is-valid]="location && location.valid && location.touched"
-                    formControlName="location"
-                />
-                <div
-                    *ngIf="location?.invalid && location?.touched"
-                    class="invalid-feedback text-danger">
-                    <div *ngIf="location?.errors?.['required']">Le lieu est requis</div>
-                </div>
-            </div>
-
             
-
             <div class="float-end">
                 <button
                     (click)="goToHomePage()"

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Feedback } from '../models/feedback.model';
+import { Comment } from '../models/comment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,18 @@ export class FeedbackService {
     return this.http.post<Feedback>(`${this.baseUrl}/event/user-feedback?eventId=${eventId}&userId=${userId}`, feedback);
   }
 
-  
+  updateOrCreateComment(eventId: number|undefined, userId: number, comment: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/event/user-comment`, null, {
+      params: {
+        eventId: eventId? eventId.toString() : '0',
+        userId: userId.toString(),
+        comment: comment
+      }
+    });
+  }
+    
+getEventFeedbacks(eventId: number|undefined): Observable<Comment[]> {
+      return this.http.get<Comment[]>(`${this.baseUrl}/event/${eventId}`);
+    }
 
 }
