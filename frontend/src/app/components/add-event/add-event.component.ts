@@ -18,14 +18,14 @@ export class AddEventComponent {
     name: [
       '',
       {
-        validators: [Validators.required, Validators.minLength(5) ,Validators.maxLength(150)],
+        validators: [Validators.required, Validators.minLength(1) ,Validators.maxLength(150)],
         updateOn: 'blur'
       }
     ],
     category: [
       '',
       {
-        validators: [Validators.required, Validators.minLength(5) ,Validators.maxLength(150)],
+        validators: [Validators.required, Validators.minLength(1) ,Validators.maxLength(150)],
         updateOn: 'blur'
       }
     ],
@@ -62,7 +62,6 @@ export class AddEventComponent {
 
 	onSubmit(): void {
     if (this.add_event_form.valid) {
-      console.log(this.add_event_form.value);
       const observer: Observer<any> = {
         next: () => {
           Swal.fire({
@@ -86,7 +85,9 @@ export class AddEventComponent {
       };
 
       this.userService.getCurrentUser().subscribe(user => {
-        this.eventService.createEvent({ ...this.add_event_form.value, organizer: user }).subscribe(observer);
+        //c'est pas le meilleur fix mais on avait pas compris pourquoi cet observer s'excute plusieus fois
+        if(this.router.url=='/events/new')
+          this.eventService.createEvent({ ...this.add_event_form.value, organizer: user }).subscribe(observer);
       });
     }
   }

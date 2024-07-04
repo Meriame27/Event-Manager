@@ -39,8 +39,7 @@ export class EventListComponent implements OnInit {
   updateShowedEvents(){
     this.showedEvents = this.events.filter(event => {
       return event.category.toLowerCase().includes(this.searchValue.toLowerCase())||
-      event.name.toLowerCase().includes(this.searchValue.toLowerCase())||
-      event.location.toLowerCase().includes(this.searchValue.toLowerCase())
+      event.name.toLowerCase().includes(this.searchValue.toLowerCase()) 
     })
       
   }
